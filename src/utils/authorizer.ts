@@ -3,7 +3,7 @@ import { provider, program } from '@/global';
 import {  PublicKey } from "@solana/web3.js";
 import { BN } from "bn.js";
 
-export const AUTH_ID = 369;
+export const AUTH_ID = 171;
 export const ORACLE_CLOSES_IN = 0;
 export const ORACLE_FINISHED_IN = 0;
 

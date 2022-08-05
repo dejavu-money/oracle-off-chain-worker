@@ -1,17 +1,15 @@
 import * as anchor from "@project-serum/anchor";
-import { provider, program } from '@/global';
-import {  PublicKey } from "@solana/web3.js";
+import { provider, program, FEEDS, CHAINLINK_PROGRAM_PUBLIC_KEY } from '@/global';
+import { PublicKey } from "@solana/web3.js";
 import { BN } from "bn.js";
 
 export const AUTH_ID = 369;
 export const ORACLE_CLOSES_IN = 0;
 export const ORACLE_FINISHED_IN = 0;
 
-export async function createRandomAccount(authorizer: PublicKey): Promise<PublicKey> {
+export async function createRandomAccount(authorizer: PublicKey, feed: PublicKey): Promise<PublicKey> {
   const randomOracleId = new Date().getTime()
   const account = await getPublicKey(randomOracleId);
-  const feedAccount = new anchor.web3.PublicKey("HgTtcbcmp5BeThax5AU8vg4VwK79qAvAKKFMs8txMLW6");
-  const chainLinkProgramAccount = new anchor.web3.PublicKey("HEvSKofvBgfaexv23kMabbYqxasxU3mQ4ibBMEmJWHny")
 
   await program
   .methods
@@ -20,18 +18,15 @@ export async function createRandomAccount(authorizer: PublicKey): Promise<Public
     oracleAuthorizer: authorizer,
     oracleItem: account,
     user: provider.wallet.publicKey,
-    feedAccount: feedAccount,
-    chainlinkProgram: chainLinkProgramAccount
+    feedAccount: feed,
+    chainlinkProgram: CHAINLINK_PROGRAM_PUBLIC_KEY
   })
   .rpc();
 
   return account;
 }
 
-export async function updateAccount(auth: PublicKey, oracle: PublicKey): Promise<void> {
-  const feedAccount = new anchor.web3.PublicKey("HgTtcbcmp5BeThax5AU8vg4VwK79qAvAKKFMs8txMLW6");
-  const chainLinkProgramAccount = new anchor.web3.PublicKey("HEvSKofvBgfaexv23kMabbYqxasxU3mQ4ibBMEmJWHny")
-  
+export async function updateAccount(auth: PublicKey, feed: PublicKey, oracle: PublicKey): Promise<void> {  
   await program
     .methods
     .updateOracle()
@@ -39,8 +34,8 @@ export async function updateAccount(auth: PublicKey, oracle: PublicKey): Promise
       oracleItem: oracle,
       oracleAuthorizer: auth,
       user: provider.wallet.publicKey,
-      feedAccount: feedAccount,
-      chainlinkProgram: chainLinkProgramAccount
+      feedAccount: feed,
+      chainlinkProgram: CHAINLINK_PROGRAM_PUBLIC_KEY
     })
     .rpc()
 }
