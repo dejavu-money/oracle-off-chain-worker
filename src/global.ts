@@ -15,7 +15,7 @@ export const program = new Program<Oracle>(
   provider
 );
 
-export const FEEDS = {
+export const FEEDS: { [key: string]: PublicKey } = {
   BTC: new PublicKey(process.env.CHAINLINK_BTC_FEED as string),
   ETH: new PublicKey(process.env.CHAINLINK_ETH_FEED as string),
   SOL: new PublicKey(process.env.CHAINLINK_SOL_FEED as string) 

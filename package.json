@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsnd -r tsconfig-paths/register --respawn --transpile-only src/hello",
+    "start": "node dist/index.js",
+    "dev": "TS_NODE=true tsnd -r tsconfig-paths/register --respawn --transpile-only src/index",
     "build": "tsc && tsc-alias",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,6 +21,7 @@
   "dependencies": {
     "@project-serum/anchor": "^0.25.0",
     "@solana/buffer-layout": "^4.0.0",
+    "bree": "^9.1.2",
     "bs58": "^5.0.0",
     "dotenv": "^16.0.1"
   }
