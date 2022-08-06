@@ -4,7 +4,7 @@ import { Program } from "@project-serum/anchor";
 import idl from '@/anchor/idl/oracle.json';
 import { PublicKey } from "@solana/web3.js";
 
-export const MAX_ORACLES: number = 3;
+export const MAX_ORACLES: number = 1;
 export const ORACLE_PROGRAM_PUBLIC_KEY = new PublicKey(process.env.ORACLE_PROGRAM_ID as string);
 export const CHAINLINK_PROGRAM_PUBLIC_KEY = new PublicKey(process.env.CHAINLINK_PROGRAM_ID as string);
 export const provider = anchor.AnchorProvider.env();
